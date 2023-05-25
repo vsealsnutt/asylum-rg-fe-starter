@@ -5,6 +5,7 @@ import GrantRatesByNationalityImg from '../../../styles/Images/pie-chart-no-text
 import GrantRatesOverTimeImg from '../../../styles/Images/line-graph-no-text.png';
 import HrfPhoto from '../../../styles/Images/paper-stack.jpg';
 import '../../../styles/RenderLandingPage.less';
+import { Row, Col } from 'antd';
 import { Button } from 'antd';
 import { useHistory } from 'react-router-dom';
 // for the purposes of testing PageNav
@@ -33,38 +34,74 @@ function RenderLandingPage(props) {
 
       {/* Graphs Section: Add code here for the graphs section for your first ticket */}
       <div className="graphs-section">
-        <div className="bar-graph-img-container">
+        {/* Rows & Columns */}
+        <Row gutter={24}>
+          <Col span={8}>
+            <div className="grant-rates-by-office-graph-container">
+              <img
+                src={GrantRatesByOfficeImg}
+                alt="Bar graph for grant rates by office"
+                className="bar-graph-img"
+              />
+              <h3>Search Grant Rates By Office</h3>
+            </div>
+          </Col>
+
+          <Col span={8}>
+            <div className="grant-rates-by-nationality-container">
+              <img
+                src={GrantRatesByNationalityImg}
+                alt="Pie chart for grant rates by nationality"
+                className="pie-chart-img"
+              />
+              <h3>Search Grant Rates By Nationality</h3>
+            </div>
+          </Col>
+
+          <Col span={8}>
+            <div className="grant-rates-over-time-container">
+              <img
+                src={GrantRatesOverTimeImg}
+                alt="Line graph for grant rates over time"
+                className="line-graph-img"
+              />
+              <h3>Search Grant Rates Over Time</h3>
+            </div>
+          </Col>
+        </Row>
+
+        {/* <div className="bar-graph-img-container">
           <img
             src={GrantRatesByOfficeImg}
             alt="Bar graph for grant rates by office"
             className="bar-graph-img"
           />
-        </div>
-        <div className="bar-graph-text-container">
+        </div> */}
+        {/* <div className="bar-graph-text-container">
           <h3>Search Grant Rates By Office</h3>
-        </div>
+        </div> */}
 
-        <div className="pie-chart-img-container">
+        {/* <div className="pie-chart-img-container">
           <img
             src={GrantRatesByNationalityImg}
             alt="Pie chart for grant rates by nationality"
             className="pie-chart-img"
           />
-        </div>
-        <div className="pie-chart-text-container">
+        </div> */}
+        {/* <div className="pie-chart-text-container">
           <h3>Search Grant Rates By Nationality</h3>
-        </div>
+        </div> */}
 
-        <div className="line-graph-img-container">
+        {/* <div className="line-graph-img-container">
           <img
             src={GrantRatesOverTimeImg}
             alt="Line graph for grant rates over time"
             className="line-graph-img"
           />
-        </div>
-        <div className="line-graph-text-container">
+        </div> */}
+        {/* <div className="line-graph-text-container">
           <h3>Search Grant Rates Over Time</h3>
-        </div>
+        </div> */}
       </div>
 
       <div className="view-more-data-btn-container">
@@ -106,44 +143,46 @@ function RenderLandingPage(props) {
         {/* Bottom Section: Add code here for the graphs section for your first ticket */}
         <div className="bottom-section">
           <div className="bottom-section-title-container">
-            <h2>Systemic Disparity Insights</h2>
+            <h1>Systemic Disparity Insights</h1>
           </div>
 
-          <div className="first-stat-container">
-            <div className="first-stat-title">
-              <h2>36%</h2>
+          <div className="data-container">
+            <div className="first-data-point-container">
+              <div className="first-data-point-title">
+                <h2>36%</h2>
+              </div>
+              <div className="first-data-point-text">
+                <h3>
+                  By the end of the Trump administration, the average asylum
+                  office grant rate had fallen 36 percent from an average of 44
+                  percent in fiscal year 2016 to 28 percent in fiscal year 2020.
+                </h3>
+              </div>
             </div>
-            <div className="first-stat-text">
-              <h3>
-                By the end of the Trump administration, the average asylum
-                office grant rate had fallen 36 percent from an average of 44
-                percent in fiscal year 2016 to 28 percent in fiscal year 2020.
-              </h3>
-            </div>
-          </div>
 
-          <div className="second-stat-container">
-            <div className="second-stat-title">
-              <h2>5%</h2>
+            <div className="second-data-point-container">
+              <div className="second-data-point-title">
+                <h2>5%</h2>
+              </div>
+              <div className="second-data-point-text">
+                <h3>
+                  The New York asylum office grant rate dropped to 5 percent in
+                  fiscal year 2020.
+                </h3>
+              </div>
             </div>
-            <div className="second-stat-text">
-              <h3>
-                The New York asylum office grant rate dropped to 5 percent in
-                fiscal year 2020.
-              </h3>
-            </div>
-          </div>
 
-          <div className="third-stat-container">
-            <div className="third-stat-title">
-              <h2>6x Lower</h2>
-            </div>
-            <div className="third-stat-text">
-              <h3>
-                Between fiscal year 2017 and 2020, the New York asylum office's
-                average grant rate was six times lower than the San Fransisco
-                asylum office.
-              </h3>
+            <div className="third-data-point-container">
+              <div className="third-data-point-title">
+                <h2>6x Lower</h2>
+              </div>
+              <div className="third-data-point-text">
+                <h3>
+                  Between fiscal year 2017 and 2020, the New York asylum
+                  office's average grant rate was six times lower than the San
+                  Fransisco asylum office.
+                </h3>
+              </div>
             </div>
           </div>
         </div>
