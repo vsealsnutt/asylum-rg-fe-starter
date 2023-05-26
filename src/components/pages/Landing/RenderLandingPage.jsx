@@ -72,24 +72,22 @@ function RenderLandingPage(props) {
       </div>
 
       <div className="btns-container">
-        <div className="view-more-data-btn-container">
-          <Button
-            type="default"
-            style={{ backgroundColor: '#404C4A', color: '#FFFFFF' }}
-            onClick={() => history.push('/graphs')}
-          >
-            View the Data
-          </Button>
-        </div>
+        <Button
+          className="view-the-data-btn"
+          type="default"
+          style={{ backgroundColor: '#404C4A', color: '#FFFFFF' }}
+          onClick={() => history.push('/graphs')}
+        >
+          View the Data
+        </Button>
 
-        <div className="download-the-data-btn-container">
-          <Button
-            type="default"
-            style={{ backgroundColor: '#404C4A', color: '#FFFFFF' }}
-          >
-            Download the Data
-          </Button>
-        </div>
+        <Button
+          className="download-the-data-btn"
+          type="default"
+          style={{ backgroundColor: '#404C4A', color: '#FFFFFF' }}
+        >
+          Download the Data
+        </Button>
       </div>
 
       <div className="middle-section">
