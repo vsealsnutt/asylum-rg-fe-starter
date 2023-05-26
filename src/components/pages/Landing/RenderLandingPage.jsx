@@ -69,58 +69,27 @@ function RenderLandingPage(props) {
             </div>
           </Col>
         </Row>
-
-        {/* <div className="bar-graph-img-container">
-          <img
-            src={GrantRatesByOfficeImg}
-            alt="Bar graph for grant rates by office"
-            className="bar-graph-img"
-          />
-        </div> */}
-        {/* <div className="bar-graph-text-container">
-          <h3>Search Grant Rates By Office</h3>
-        </div> */}
-
-        {/* <div className="pie-chart-img-container">
-          <img
-            src={GrantRatesByNationalityImg}
-            alt="Pie chart for grant rates by nationality"
-            className="pie-chart-img"
-          />
-        </div> */}
-        {/* <div className="pie-chart-text-container">
-          <h3>Search Grant Rates By Nationality</h3>
-        </div> */}
-
-        {/* <div className="line-graph-img-container">
-          <img
-            src={GrantRatesOverTimeImg}
-            alt="Line graph for grant rates over time"
-            className="line-graph-img"
-          />
-        </div> */}
-        {/* <div className="line-graph-text-container">
-          <h3>Search Grant Rates Over Time</h3>
-        </div> */}
       </div>
 
-      <div className="view-more-data-btn-container">
-        <Button
-          type="default"
-          style={{ backgroundColor: '#404C4A', color: '#FFFFFF' }}
-          onClick={() => history.push('/graphs')}
-        >
-          View the Data
-        </Button>
-      </div>
+      <div className="btns-container">
+        <div className="view-more-data-btn-container">
+          <Button
+            type="default"
+            style={{ backgroundColor: '#404C4A', color: '#FFFFFF' }}
+            onClick={() => history.push('/graphs')}
+          >
+            View the Data
+          </Button>
+        </div>
 
-      <div className="download-the-data-btn-container">
-        <Button
-          type="default"
-          style={{ backgroundColor: '#404C4A', color: '#FFFFFF' }}
-        >
-          Download the Data
-        </Button>
+        <div className="download-the-data-btn-container">
+          <Button
+            type="default"
+            style={{ backgroundColor: '#404C4A', color: '#FFFFFF' }}
+          >
+            Download the Data
+          </Button>
+        </div>
       </div>
 
       <div className="middle-section">
