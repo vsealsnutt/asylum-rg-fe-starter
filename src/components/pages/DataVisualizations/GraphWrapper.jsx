@@ -73,11 +73,24 @@ function GraphWrapper(props) {
     
     */
 
-    const url = 'https://hrf-asylum-be-b.herokuapp.com/cases';
+    let url = 'https://hrf-asylum-be-b.herokuapp.com/cases';
+
+    let summary = '';
+
+    if (view === 'time-series') {
+      summary = 'fiscalSummary';
+    } else if (view === 'citizenship') {
+      summary = 'citizenshipSummary';
+    }
+
+    if (view === 'time-series') {
+      // result.data should be [result.data] else result.data
+      // if still not working, check for bugs in rawApiDataToPlotly
+    }
 
     if (office === 'all' || !office) {
       axios
-        .get(`${url}/fiscalSummary`, {
+        .get(`${url}/${summary}`, {
           // mock URL, can be simply replaced by `${Real_Production_URL}/summary` in prod!
           params: {
             from: years[0],
@@ -85,14 +98,14 @@ function GraphWrapper(props) {
           },
         })
         .then(result => {
-          stateSettingCallback(view, office, result.data); // <-- `test_data` here can be simply replaced by `result.data` in prod!
+          stateSettingCallback(view, office, [result.data]); // <-- `test_data` here can be simply replaced by `result.data` in prod!
         })
         .catch(err => {
           console.error(err);
         });
     } else {
       axios
-        .get(`${url}/fiscalSummary`, {
+        .get(`${url}/${summary}`, {
           // mock URL, can be simply replaced by `${Real_Production_URL}/summary` in prod!
           params: {
             from: years[0],
@@ -101,7 +114,8 @@ function GraphWrapper(props) {
           },
         })
         .then(result => {
-          stateSettingCallback(view, office, result.data); // <-- `test_data` here can be simply replaced by `result.data` in prod!
+          console.log(result);
+          stateSettingCallback(view, office, [result.data]); // <-- `test_data` here can be simply replaced by `result.data` in prod!
         })
         .catch(err => {
           console.error(err);
