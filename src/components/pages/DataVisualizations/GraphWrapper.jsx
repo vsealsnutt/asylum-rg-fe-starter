@@ -76,51 +76,118 @@ function GraphWrapper(props) {
     let url = 'https://hrf-asylum-be-b.herokuapp.com/cases';
 
     let summary = '';
+    let formatData;
 
-    if (view === 'time-series') {
-      summary = 'fiscalSummary';
-    } else if (view === 'citizenship') {
-      summary = 'citizenshipSummary';
+    switch (view) {
+      case 'time-series':
+      case 'office-heat-map':
+        summary = 'fiscalSummary';
+        formatData = data => [data];
+        break;
+      case 'citizenship':
+        summary = 'citizenshipSummary';
+        formatData = data => [{ citizenshipResults: data, yearResults: [] }];
+        break;
+      default:
+        break;
     }
 
-    if (view === 'time-series') {
-      // result.data should be [result.data] else result.data
-      // if still not working, check for bugs in rawApiDataToPlotly
-    }
+    axios
+      .get(`${url}/${summary}`, {
+        params: {
+          from: years[0],
+          to: years[1],
+          office: office !== 'all' ? office : undefined,
+        },
+      })
+      .then(result => {
+        stateSettingCallback(view, office, formatData(result.data)); // <-- `test_data` here can be simply replaced by `result.data` in prod!
+      })
+      .catch(err => {
+        console.error(err);
+      });
 
-    if (office === 'all' || !office) {
-      axios
-        .get(`${url}/${summary}`, {
-          // mock URL, can be simply replaced by `${Real_Production_URL}/summary` in prod!
-          params: {
-            from: years[0],
-            to: years[1],
-          },
-        })
-        .then(result => {
-          stateSettingCallback(view, office, [result.data]); // <-- `test_data` here can be simply replaced by `result.data` in prod!
-        })
-        .catch(err => {
-          console.error(err);
-        });
-    } else {
-      axios
-        .get(`${url}/${summary}`, {
-          // mock URL, can be simply replaced by `${Real_Production_URL}/summary` in prod!
-          params: {
-            from: years[0],
-            to: years[1],
-            office: office,
-          },
-        })
-        .then(result => {
-          console.log(result);
-          stateSettingCallback(view, office, [result.data]); // <-- `test_data` here can be simply replaced by `result.data` in prod!
-        })
-        .catch(err => {
-          console.error(err);
-        });
-    }
+    // if (office === 'all' || !office) {
+    //   switch (view) {
+    //     case 'time-series':
+    //     case 'office-heat-map':
+    //       axios
+    //         .get(`${url}/fiscalSummary`, {
+    //       // mock URL, can be simply replaced by `${Real_Production_URL}/summary` in prod!
+    //           params: {
+    //             from: years[0],
+    //             to: years[1],
+    //           },
+    //         })
+    //         .then(result => {
+    //           stateSettingCallback(view, office, [result.data]); // <-- `test_data` here can be simply replaced by `result.data` in prod!
+    //         })
+    //         .catch(err => {
+    //           console.error(err);
+    //         });
+    //       break;
+    //     case 'citizenship':
+    //       axios
+    //         .get(`${url}/citizenshipSummary`, {
+    //     // mock URL, can be simply replaced by `${Real_Production_URL}/summary` in prod!
+    //           params: {
+    //             from: years[0],
+    //             to: years[1],
+    //           },
+    //         })
+    //         .then(result => {
+    //           console.log('testing', result.data, result.data?.data);
+    //           stateSettingCallback(view, office, formatData); // <-- `test_data` here can be simply replaced by `result.data` in prod!
+    //         })
+    //         .catch(err => {
+    //           console.error(err);
+    //         });
+    //       break;
+    //     default:
+    //       break;
+    //   }
+    // } else {
+    //   switch (view) {
+    //     case 'time-series':
+    //       axios
+    //         .get(`${url}/fiscalSummary`, {
+    //           // mock URL, can be simply replaced by `${Real_Production_URL}/summary` in prod!
+    //           params: {
+    //             from: years[0],
+    //             to: years[1],
+    //             office: office,
+    //           },
+    //         })
+    //         .then(result => {
+    //           console.log(result);
+    //           stateSettingCallback(view, office, [result.data]); // <-- `test_data` here can be simply replaced by `result.data` in prod!
+    //         })
+    //         .catch(err => {
+    //           console.error(err);
+    //         });
+    //         break;
+    //       case 'citizenship':
+    //         axios
+    //           .get(`${url}/citizenshipSummary`, {
+    //           // mock URL, can be simply replaced by `${Real_Production_URL}/summary` in prod!
+    //           params: {
+    //             from: years[0],
+    //             to: years[1],
+    //             office: office,
+    //           },
+    //         })
+    //         .then(result => {
+    //           console.log(result);
+    //           stateSettingCallback(view, office, result.data); // <-- `test_data` here can be simply replaced by `result.data` in prod!
+    //         })
+    //         .catch(err => {
+    //           console.error(err);
+    //         });
+    //         break;
+    //       default:
+    //         break;
+    //     }
+    // }
   }
   const clearQuery = (view, office) => {
     dispatch(resetVisualizationQuery(view, office));
