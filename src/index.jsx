@@ -7,6 +7,9 @@ import {
   Switch,
 } from 'react-router-dom';
 
+import { createRoot } from 'react-dom/client';
+import { Auth0Provider } from '@auth0/auth0-react';
+
 import 'antd/dist/antd.less';
 import { NotFoundPage } from './components/pages/NotFound';
 import { LandingPage } from './components/pages/Landing';
@@ -24,13 +27,24 @@ import reducer from './state/reducers';
 import { colors } from './styles/data_vis_colors';
 
 const { primary_accent_color } = colors;
+const root = createRoot(document.getElementById('root'));
 
 const store = configureStore({ reducer: reducer });
 ReactDOM.render(
   <Router>
     <Provider store={store}>
       <React.StrictMode>
-        <App />
+        root.render(
+        <Auth0Provider
+          domain="dev-ftwccbdqhjmp8r2q.us.auth0.com"
+          clientId="eAzg9FdChHxghLv8Q1RGXcfwz0shKTje"
+          authorizationParams={{
+            redirect_uri: window.location.origin,
+          }}
+        >
+          <App />
+        </Auth0Provider>
+        , );
       </React.StrictMode>
     </Provider>
   </Router>,
