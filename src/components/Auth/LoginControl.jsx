@@ -1,34 +1,22 @@
-import React from 'react';
+import React, { Fragment } from 'react';
+import { Link } from 'react-router-dom';
+import { useAuth0 } from '@auth0/auth0-react';
 import LoginButton from './loginComponent';
 import LogoutButton from './logoutComponent';
 
-class LoginControl extends React.Component {
-  constructor(props) {
-    super(props);
-    this.handleLoginClick = this.handleLoginClick.bind(this);
-    this.handleLogoutClick = this.handleLogoutClick.bind(this);
-    this.state = { isLoggedIn: false };
-  }
+const LoginControl = () => {
+  const { isAuthenticated } = useAuth0();
 
-  handleLoginClick() {
-    this.setState({ isLoggedIn: true });
-  }
-
-  handleLogoutClick() {
-    this.setState({ isLoggedIn: false });
-  }
-
-  render() {
-    const isLoggedIn = this.state.isLoggedIn;
-    let button;
-    if (isLoggedIn) {
-      button = <LogoutButton onClick={this.handleLogoutClick} />;
-    } else {
-      button = <LoginButton onClick={this.handleLoginClick} />;
-    }
-
-    return <div>{button}</div>;
-  }
-}
+  return isAuthenticated ? (
+    <Fragment>
+      <Link to="/profile" style={{ color: '#E2F0F7', paddingRight: '75px' }}>
+        Profile
+      </Link>
+      <LogoutButton />
+    </Fragment>
+  ) : (
+    <LoginButton />
+  );
+};
 
 export default LoginControl;
